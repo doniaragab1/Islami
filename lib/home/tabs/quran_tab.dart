@@ -471,7 +471,7 @@ class QuranTab extends StatelessWidget {
                     GestureDetector(
                       onTap: ()
                       {
-                        Navigator.pushNamed(context, SuraDetails.routeName,
+                        Navigator.pushNamed(context, SuraDetails.routeName)
                         ;
                       },
                       child: Text(
