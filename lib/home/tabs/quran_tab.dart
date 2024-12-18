@@ -472,7 +472,7 @@ class QuranTab extends StatelessWidget {
                       onTap: ()
                       {
                         Navigator.pushNamed(context, SuraDetails.routeName,
-                        arguments: );
+                        ;
                       },
                       child: Text(
                         arabicQuranSuras[index],
