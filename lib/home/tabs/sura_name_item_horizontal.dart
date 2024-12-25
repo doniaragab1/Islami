@@ -52,7 +52,7 @@ class SuraNameItemHorizontal extends StatelessWidget {
             ],
           ),
           SizedBox(width: 20,),
-          Image.asset("assets.images/Surah_list.png")
+          Image.asset("assets/images/Surah_list.png")
         ],
       ),
     );

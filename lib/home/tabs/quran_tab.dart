@@ -20,25 +20,20 @@ class _QuranTabState extends State<QuranTab> {
     super.initState();
     searchController.addListener(onSearch);
   }
+
   var searchController = TextEditingController();
 
-  onSearch()
-  {
+  onSearch() {
     SuraModel.searchResult.clear();
-     String text = searchController.text;
-     if(text.isNotEmpty)
-       {
-         for(String data in SuraModel.englishQuranSurahs)
-           {
-             if(data.toLowerCase().contains(text.toLowerCase()))
-               {
-                   SuraModel.searchResult.add(data);
-               }
-           }
-       }
-     setState(() {
-
-     });
+    String text = searchController.text;
+    if (text.isNotEmpty) {
+      for (String data in SuraModel.englishQuranSurahs) {
+        if (data.toLowerCase().contains(text.toLowerCase())) {
+          SuraModel.searchResult.add(data);
+        }
+      }
+    }
+    setState(() {});
   }
 
   @override
@@ -51,17 +46,16 @@ class _QuranTabState extends State<QuranTab> {
         children: [
           Image(image: AssetImage("assets/images/Logo.png")),
           _searchItem(),
-          SuraModel.searchResult.isNotEmpty || searchController.text.isNotEmpty ?SizedBox():_suraNameHorizontalList(),
+          SuraModel.searchResult.isNotEmpty || searchController.text.isNotEmpty
+              ? SizedBox()
+              : _suraNameHorizontalList(),
           _suraNameVertical(),
-
-
         ],
       ),
     );
   }
 
-  Widget _suraNameVertical()
-  {
+  Widget _suraNameVertical() {
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,15 +75,21 @@ class _QuranTabState extends State<QuranTab> {
                 );
               },
               itemBuilder: (context, index) {
-                return SuraNameItem(
-                  model:
-                     searchController.text.isNotEmpty?SuraModel.getSuraModelSearch(index):
-                  SuraModel.getSuraModel(index),
-
-
+                return InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, SuraDetails.routeName,
+                        arguments: SuraModel.getSuraModel(index));
+                  },
+                  child: SuraNameItem(
+                    model: searchController.text.isNotEmpty
+                        ? SuraModel.getSuraModelSearch(index)
+                        : SuraModel.getSuraModel(index),
+                  ),
                 );
               },
-              itemCount: searchController.text.isNotEmpty? SuraModel.getSearchLength(): SuraModel.getLength(),
+              itemCount: searchController.text.isNotEmpty
+                  ? SuraModel.getSearchLength()
+                  : SuraModel.getLength(),
             ),
           )
         ],
@@ -97,8 +97,7 @@ class _QuranTabState extends State<QuranTab> {
     );
   }
 
-  Widget _suraNameHorizontalList()
-  {
+  Widget _suraNameHorizontalList() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -109,23 +108,19 @@ class _QuranTabState extends State<QuranTab> {
         ),
         Container(
           height: 150,
-          child: Expanded(
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              separatorBuilder: (context, index) {
-                return SizedBox(
-                  width: 20,
-                );
-              },
-              itemBuilder: (context, index) {
-                return SuraNameItemHorizontal(
-                  model: SuraModel.getSuraModel(index),
-            
-            
-                );
-              },
-              itemCount: SuraModel.getLength(),
-            ),
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            separatorBuilder: (context, index) {
+              return SizedBox(
+                width: 20,
+              );
+            },
+            itemBuilder: (context, index) {
+              return SuraNameItemHorizontal(
+                model: SuraModel.getSuraModel(index),
+              );
+            },
+            itemCount: SuraModel.getLength(),
           ),
         ),
         SizedBox(
@@ -135,8 +130,7 @@ class _QuranTabState extends State<QuranTab> {
     );
   }
 
-  Widget _searchItem()
-  {
+  Widget _searchItem() {
     return Column(
       children: [
         TextField(
